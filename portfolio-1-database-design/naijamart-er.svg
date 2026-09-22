@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" font-family="monospace" font-size="12">
+  <style>
+    .e{fill:#eef4ff;stroke:#3355aa;stroke-width:1.2}.r{fill:none;stroke:#666;stroke-width:1.4}
+    tspan{font-size:11px}.h{font-weight:bold;font-size:12px}.lbl{font-size:10px;fill:#333}
+  </style>
+  <!-- entities -->
+  <g id="customer"><rect class="e" x="30" y="30" width="160" height="120"/><text x="40" y="48" class="h">CUSTOMER</text>
+    <text x="40" y="66"><tspan>customer_id PK</tspan></text><text x="40" y="82"><tspan>full_name</tspan></text><text x="40" y="98"><tspan>email UK</tspan></text><text x="40" y="114"><tspan>phone</tspan></text></g>
+  <g id="address"><rect class="e" x="30" y="200" width="160" height="110"/><text x="40" y="218" class="h">ADDRESS</text>
+    <text x="40" y="236"><tspan>address_id PK</tspan></text><text x="40" y="252"><tspan>customer_id FK</tspan></text><text x="40" y="268"><tspan>line1, city, state</tspan></text></g>
+  <g id="seller"><rect class="e" x="700" y="30" width="160" height="110"/><text x="710" y="48" class="h">SELLER</text>
+    <text x="710" y="66"><tspan>seller_id PK</tspan></text><text x="710" y="82"><tspan>shop_name UK</tspan></text><text x="710" y="98"><tspan>rating</tspan></text></g>
+  <g id="category"><rect class="e" x="700" y="200" width="160" height="100"/><text x="710" y="218" class="h">CATEGORY</text>
+    <text x="710" y="236"><tspan>category_id PK</tspan></text><text x="710" y="252"><tspan>name UK</tspan></text><text x="710" y="268"><tspan>parent_id FK</tspan></text></g>
+  <g id="product"><rect class="e" x="400" y="100" width="190" height="140"/><text x="410" y="118" class="h">PRODUCT</text>
+    <text x="410" y="136"><tspan>product_id PK</tspan></text><text x="410" y="152"><tspan>seller_id FK</tspan></text><text x="410" y="168"><tspan>category_id FK</tspan></text><text x="410" y="184"><tspan>name, price</tspan></text><text x="410" y="200"><tspan>stock_qty</tspan></text></g>
+  <g id="orders"><rect class="e" x="240" y="320" width="170" height="120"/><text x="250" y="338" class="h">ORDERS</text>
+    <text x="250" y="356"><tspan>order_id PK</tspan></text><text x="250" y="372"><tspan>customer_id FK</tspan></text><text x="250" y="388"><tspan>address_id FK</tspan></text><text x="250" y="404"><tspan>status,total,placed_at</tspan></text></g>
+  <g id="orderitem"><rect class="e" x="500" y="330" width="170" height="110"/><text x="510" y="348" class="h">ORDER_ITEM</text>
+    <text x="510" y="366"><tspan>order_id PK,FK</tspan></text><text x="510" y="382"><tspan>product_id PK,FK</tspan></text><text x="510" y="398"><tspan>qty, unit_price</tspan></text></g>
+  <g id="payment"><rect class="e" x="30" y="440" width="160" height="100"/><text x="40" y="458" class="h">PAYMENT</text>
+    <text x="40" y="476"><tspan>payment_id PK</tspan></text><text x="40" y="492"><tspan>order_id FK</tspan></text><text x="40" y="508"><tspan>method,status,amount</tspan></text></g>
+  <g id="shipment"><rect class="e" x="730" y="440" width="170" height="100"/><text x="740" y="458" class="h">SHIPMENT</text>
+    <text x="740" y="476"><tspan>shipment_id PK</tspan></text><text x="740" y="492"><tspan>order_id FK</tspan></text><text x="740" y="508"><tspan>courier,status,dates</tspan></text></g>
+  <g id="review"><rect class="e" x="760" y="310" width="170" height="100"/><text x="770" y="328" class="h">REVIEW</text>
+    <text x="770" y="346"><tspan>review_id PK</tspan></text><text x="770" y="362"><tspan>customer_id FK</tspan></text><text x="770" y="378"><tspan>product_id FK, rating</tspan></text></g>
+  <!-- relationships -->
+  <line class="r" x1="110" y1="150" x2="110" y2="200"/><text class="lbl" x="118" y="178">1:N has</text>
+  <line class="r" x1="110" y1="150" x2="240" y2="330"/><text class="lbl" x="140" y="250">1:N places</text>
+  <line class="r" x1="110" y1="150" x2="760" y2="340"/><text class="lbl" x="400" y="180">1:N writes</text>
+  <line class="r" x1="700" y1="90" x2="590" y2="130"/><text class="lbl" x="620" y="105">1:N sells</text>
+  <line class="r" x1="700" y1="250" x2="590" y2="200"/><text class="lbl" x="630" y="230">1:N groups</text>
+  <line class="r" x1="500" y1="240" x2="560" y2="330"/><text class="lbl" x="540" y="280">1:N in items</text>
+  <line class="r" x1="410" y1="380" x2="500" y2="380"/><text class="lbl" x="430" y="375">1:N contains</text>
+  <line class="r" x1="260" y1="440" x2="140" y2="440"/><text class="lbl" x="170" y="434">1:N paid by</text>
+  <line class="r" x1="410" y1="420" x2="760" y2="450"/><text class="lbl" x="560" y="434">1:N delivered by</text>
+  <line class="r" x1="760" y1="330" x2="600" y2="180"/><text class="lbl" x="660" y="250">N:1 reviews</text>
+</svg>

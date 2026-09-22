@@ -1,0 +1,87 @@
+erDiagram
+    CUSTOMER ||--o{ ORDERS : places
+    CUSTOMER ||--o{ REVIEW : writes
+    CUSTOMER ||--o{ ADDRESS : has
+    SELLER ||--o{ PRODUCT : sells
+    CATEGORY ||--o{ PRODUCT : groups
+    PRODUCT ||--o{ ORDER_ITEM : "appears in"
+    ORDERS ||--|{ ORDER_ITEM : contains
+    ORDERS ||--o{ PAYMENT : "paid by"
+    ORDERS ||--o{ SHIPMENT : "delivered by"
+    PRODUCT ||--o{ REVIEW : "reviewed on"
+
+    CUSTOMER {
+        bigint customer_id PK
+        varchar full_name
+        varchar email UK
+        varchar phone
+        timestamptz created_at
+    }
+    SELLER {
+        bigint seller_id PK
+        varchar shop_name UK
+        varchar contact_email
+        numeric rating
+        timestamptz created_at
+    }
+    CATEGORY {
+        int category_id PK
+        varchar name UK
+        int parent_id FK
+    }
+    PRODUCT {
+        bigint product_id PK
+        bigint seller_id FK
+        int category_id FK
+        varchar name
+        text description
+        numeric price
+        int stock_qty
+        timestamptz created_at
+    }
+    ADDRESS {
+        bigint address_id PK
+        bigint customer_id FK
+        varchar line1
+        varchar city
+        varchar state
+        varchar country
+    }
+    ORDERS {
+        bigint order_id PK
+        bigint customer_id FK
+        bigint address_id FK
+        varchar status
+        numeric total_amount
+        timestamptz placed_at
+    }
+    ORDER_ITEM {
+        bigint order_id PK,FK
+        bigint product_id PK,FK
+        int quantity
+        numeric unit_price
+    }
+    PAYMENT {
+        bigint payment_id PK
+        bigint order_id FK
+        varchar method
+        varchar status
+        numeric amount
+        timestamptz paid_at
+    }
+    SHIPMENT {
+        bigint shipment_id PK
+        bigint order_id FK
+        varchar courier
+        varchar status
+        timestamptz shipped_at
+        timestamptz delivered_at
+    }
+    REVIEW {
+        bigint review_id PK
+        bigint customer_id FK
+        bigint product_id FK
+        smallint rating
+        text comment
+        timestamptz created_at
+    }
