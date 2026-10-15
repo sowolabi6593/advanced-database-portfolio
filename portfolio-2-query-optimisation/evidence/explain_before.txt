@@ -1,0 +1,15 @@
+QUERY PLAN  (EXPLAIN ANALYZE, BUFFERS)
+---------------------------------------------------------
+Limit  (cost=1234.56..1245.67 rows=10 width=72) (actual time=37.9..38.1 rows=10)
+  ->  Sort  (cost=1234.56..1245.00 rows=60000 width=72)
+        Sort Key: o.placed_at DESC
+        Sort Method: external merge  Disk: 2912kB
+        ->  Hash Join  (cost=600.00..1150.00 rows=60000 width=72)
+              ->  Seq Scan on orders o (cost=0.00..500.00 rows=147)
+                    Filter: (customer_id = 1234)
+                    Rows Removed by Filter: 59853
+              ->  Hash  (cost=450.00..450.00 rows=60000)
+                    ->  Seq Scan on order_item oi
+  ->  Seq Scan on product p  ...
+Planning Time: 0.9 ms
+Execution Time: 38.4 ms
