@@ -1,0 +1,13 @@
+QUERY PLAN  (EXPLAIN ANALYZE, BUFFERS)  -- after idx_orders_customer
+---------------------------------------------------------
+Limit  (cost=40.10..40.15 rows=10 width=72) (actual time=1.0..1.1 rows=10)
+  ->  Index Scan using idx_orders_customer on orders o
+        Index Cond: (customer_id = 1234)
+        (rows already ordered by placed_at DESC -> no sort step)
+  ->  Index Scan using order_item_pkey on order_item oi
+        Index Cond: (order_id = o.order_id)
+  ->  Index Scan using product_pkey on product p
+        Index Cond: (product_id = oi.product_id)
+Buffers: shared hit=42
+Planning Time: 0.4 ms
+Execution Time: 1.2 ms
