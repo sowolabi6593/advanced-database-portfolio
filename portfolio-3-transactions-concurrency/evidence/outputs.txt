@@ -1,0 +1,26 @@
+-- T1 COMMIT: order 70001 + item + stock update committed together
+INSERT 0 1   -- orders
+UPDATE 1     -- product stock 40 -> 38
+INSERT 0 1   -- order_item
+UPDATE 1     -- orders.total_amount = 570000.00
+COMMIT
+
+-- T2: payment INSERT inside txn then ROLLBACK
+BEGIN
+INSERT 0 1
+ROLLBACK
+SELECT count(*) FROM payment WHERE order_id=70001;
+ count
+-------
+     0        -- nothing leaked
+
+-- EXPERIMENT A (lost update):
+--   session A: UPDATE -> writes 35; session B unblocks, writes 37
+--   Expected 40-5-3 = 32; observed 37  => LOST UPDATE under READ COMMITTED
+
+-- EXPERIMENT B (SELECT FOR UPDATE):
+--   A commits 35, B then reads locked row (35) and writes 32. Correct.
+
+-- EXPERIMENT D (SERIALIZABLE):
+-- ERROR:  could not serialize access due to concurrent update
+-- SQLSTATE: 40001  -> application retries transaction
