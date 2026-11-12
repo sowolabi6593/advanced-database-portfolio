@@ -1,0 +1,19 @@
+{
+  "order_doc": {
+    "_id": "660f9c2e1f4d2a3b8c9e0a11",
+    "customer_id": 1,
+    "address": {"line1":"12 Adeola Odeku St","city":"Lagos","state":"Lagos"},
+    "items": [
+      {"product_id":1,"name":"Infinix Note 40 Pro","qty":1,"price_at_purchase":285000},
+      {"product_id":2,"name":"Oraimo PowerBank 20000mAh","qty":2,"price_at_purchase":18500}
+    ],
+    "total": 322000,
+    "status": "PENDING",
+    "placed_at": "2026-10-14T15:42:00Z"
+  },
+  "product_doc": {
+    "_id": 1, "seller_id": 1, "category": "Electronics",
+    "name": "Infinix Note 40 Pro", "price": 285000, "stock": 39,
+    "attributes": {"ram":"8GB","storage":"256GB","colour":"Titan Gold"}
+  }
+}
