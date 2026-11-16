@@ -1,0 +1,12 @@
+rs.status()  (after docker compose up + init-replica.js)
+-----------------------------------------------------
+members:
+  mongo1:27017  state: PRIMARY    uptime: 1821s
+  mongo2:27017  state: SECONDARY  uptime: 1821s  lastHeartbeat ok
+  mongo3:27017  state: SECONDARY  uptime: 1821s  lastHeartbeat ok
+
+failover test:
+  $ docker stop mongo1
+  rs.status() -> mongo2 state: PRIMARY (elected in ~10s)
+  db.orders.insertOne({customer_id:3,items:[{product_id:4,qty:1}],total:9800})
+  -> acknowledged, written on new primary. Old primary rejoins as SECONDARY.
